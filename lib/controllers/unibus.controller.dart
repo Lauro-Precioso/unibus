@@ -1,14 +1,13 @@
-import'../models/unibus.model.dart';
+import '../models/unibus.model.dart';
 
 class FaculdadeController {
-
   final tasks = [
     Task('Fatec'),
-    Task('Unip', finished: true),
+    Task('Unip'),
     Task('Unorp'),
     Task('Unirp'),
-    Task('Unesp', finished: true),
-    Task('Anhanguera', finished: true),
+    Task('Unesp'),
+    Task('Anhanguera'),
     Task('Cedu Verde'),
   ];
 
@@ -23,5 +22,4 @@ class FaculdadeController {
   void update(Task task) {}
 
   void delete(Task task) {}
-
 }

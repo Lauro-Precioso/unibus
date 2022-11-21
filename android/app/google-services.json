@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "748640612594",
+    "project_id": "unibus-c13b2",
+    "storage_bucket": "unibus-c13b2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:748640612594:android:79be579434adb1aee5606b",
+        "android_client_info": {
+          "package_name": "com.example.unibus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "748640612594-q87jqhdqu2pe7cqbus7ucfq77016oo3v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVSDywMlo5_CtjriRrKjLp2RNvLxAjWfw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "748640612594-q87jqhdqu2pe7cqbus7ucfq77016oo3v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

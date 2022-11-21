@@ -17,29 +17,15 @@ class _AndroidAppState extends State<AndroidApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomePage(),
+      debugShowCheckedModeBanner: false,
+      home: const HomePage(),
       routes: {
         '/aluno': (context) => AlunoPage(),
         '/motorista': (context) => MotoristaPage(),
-        '/login': (context) => HomePage(),
-        '/perfil': (context) => PerfilPage(),
+        '/login': (context) => const HomePage(),
+        '/perfil': (context) => const ProfilePage(),
+        '/root': (context) => const AndroidApp()
       },
     );
   }
 }
-
-// class AndroidApp extends StatelessWidget {
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       home:  LoginPage(),
-//       routes: {
-//         '/aluno':(context) => AlunoPage(),
-//         '/motorista':(context) => MotoristaPage(),
-//         '/login':(context) => LoginPage(),
-//         '/perfil':(context) => PerfilPage(),
-//       },
-//     );
-//   }
-// }
