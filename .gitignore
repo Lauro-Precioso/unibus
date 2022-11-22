@@ -30,7 +30,7 @@ migrate_working_dir/
 .packages
 .pub-cache/
 .pub/
-/build/
+# /build/ - remove that option to get the .apk
 
 # Web related
 lib/generated_plugin_registrant.dart
@@ -45,3 +45,15 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Exceptions - to get the .apk
+!/build/
+
+/build/*
+!/build/app/
+
+/build/app/*
+!/build/app/outputs/
+
+/build/app/outputs/*
+!/build/app/outputs/apk/
