@@ -4,7 +4,7 @@ Trabalho de Dispositivos Móveis da Fatec de São José do Rio Preto do Curso de
 
 ## Integrantes do Grupo
 
-- Adnan Silva Pedroso
-- Lance Armstrong Ferreira
-- Lauro Luis Zarpelão Precioso
-- Taylor Rayan Fernandes
+- Adnan Pedroso
+- Gabriel Viscardi
+- Lauro Precioso
+- Taylor Fernandes
