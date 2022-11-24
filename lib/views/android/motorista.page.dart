@@ -22,7 +22,7 @@ class _MotoristaPageState extends State<MotoristaPage> {
   @override
   Widget build(BuildContext context) {
     ThemeData(
-      floatingActionButtonTheme: FloatingActionButtonThemeData(
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(
         backgroundColor: Colors.green,
         foregroundColor: Colors.white,
       ),
@@ -35,7 +35,7 @@ class _MotoristaPageState extends State<MotoristaPage> {
               // Important: Remove any padding from the ListView.
               padding: EdgeInsets.zero,
               children: [
-                DrawerHeader(
+                const DrawerHeader(
                   decoration: BoxDecoration(
                     color: Color.fromARGB(255, 22, 148, 64),
                   ),
@@ -50,8 +50,7 @@ class _MotoristaPageState extends State<MotoristaPage> {
                 ListTile(
                   title: const Text('Logout'),
                   onTap: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: ((context) => const AndroidApp())));
+                    Navigator.of(context).pushNamed('/root');
                   },
                 ),
               ],
