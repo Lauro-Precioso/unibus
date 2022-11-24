@@ -1,10 +1,8 @@
-class Task
-{
+class Task {
   String? name;
   bool? finished;
 
-  Task(this.name, {this.finished=false});
-
+  Task(this.name, this.finished);
 }
 
 //Task('task 1')

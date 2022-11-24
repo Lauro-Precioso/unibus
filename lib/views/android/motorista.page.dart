@@ -18,6 +18,7 @@ class MotoristaPage extends StatefulWidget {
 
 class _MotoristaPageState extends State<MotoristaPage> {
   final taskController = new FaculdadeController();
+  var collection = FirebaseFirestore.instance.collection('Faculdades');
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +67,14 @@ class _MotoristaPageState extends State<MotoristaPage> {
                 final task = taskController.read()[index];
                 return CheckboxListTile(
                   value: task.finished,
-                  onChanged: null,
+                  onChanged: (bool? value) {
+                    setState(() {
+                      task.finished = value!;
+                      collection
+                          .doc(task.name)
+                          .update({'finished': task.finished});
+                    });
+                  },
                   title: Text(task.name!),
                 );
               }),
