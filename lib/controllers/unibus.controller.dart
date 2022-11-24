@@ -2,13 +2,13 @@ import '../models/unibus.model.dart';
 
 class FaculdadeController {
   final tasks = [
-    Task('Fatec'),
-    Task('Unip'),
-    Task('Unorp'),
-    Task('Unirp'),
-    Task('Unesp'),
-    Task('Anhanguera'),
-    Task('Cedu Verde'),
+    Task('Fatec', false),
+    Task('Unip', false),
+    Task('Unorp', false),
+    Task('Unirp', false),
+    Task('Unesp', false),
+    Task('Anhanguera', false),
+    Task('Cedu Verde', false),
   ];
 
   void Create(Task task) {

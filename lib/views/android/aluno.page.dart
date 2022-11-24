@@ -1,15 +1,19 @@
 //igonre_for_file:
 //ignore_for_file:
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:unibus/controllers/unibus.controller.dart';
-
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'android.app.dart';
 import 'login.page.dart';
 
 class AlunoPage extends StatelessWidget {
   final taskController = new FaculdadeController();
+
+  var collection = FirebaseFirestore.instance.collection('Faculdades');
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +60,7 @@ class AlunoPage extends StatelessWidget {
               itemCount: taskController.read().length,
               itemBuilder: (_, index) {
                 final task = taskController.read()[index];
+                var query = collection.doc(task.name).get();
                 return CheckboxListTile(
                   value: task.finished,
                   onChanged: null,
