@@ -14,7 +14,7 @@ class AlunoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeData(
-      floatingActionButtonTheme: FloatingActionButtonThemeData(
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(
         backgroundColor: Colors.green,
         foregroundColor: Colors.white,
       ),
@@ -27,7 +27,7 @@ class AlunoPage extends StatelessWidget {
               // Important: Remove any padding from the ListView.
               padding: EdgeInsets.zero,
               children: [
-                DrawerHeader(
+                const DrawerHeader(
                   decoration: BoxDecoration(
                     color: Color.fromARGB(255, 22, 148, 64),
                   ),
@@ -42,15 +42,14 @@ class AlunoPage extends StatelessWidget {
                 ListTile(
                   title: const Text('Logout'),
                   onTap: () {
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: ((context) => const AndroidApp())));
+                    Navigator.of(context).pushNamed('/root');
                   },
                 ),
               ],
             ),
           ),
           appBar: AppBar(
-            title: Text("Unibus"),
+            title: const Text("Unibus"),
             backgroundColor: Colors.green,
           ),
           body: ListView.builder(

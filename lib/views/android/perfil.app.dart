@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:unibus/views/android/login.page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'android.app.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -15,46 +14,41 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  var collection = FirebaseFirestore.instance.collection('Users');
+  var uid = FirebaseAuth.instance.currentUser?.uid;
+
   String? name = '';
   String? college = '';
+  String? image = '';
 
-  dynamic _getName() async {
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .get()
-        .then((snapshot) {
-      if (snapshot.exists) {
-        setState(() {
-          name = snapshot.get('nome')!;
-        });
+  //Coletando os dados do usuário
+  Future _fetchData() async {
+    var query = await collection.doc(uid).get();
+
+    setState(() {
+      name = query.get('nome');
+      image = query.get('imagem');
+
+      if (query.get('faculdade') != null) {
+        college = query.get('faculdade');
+      } else {
+        college = 'Motorista';
       }
     });
+    return [name, image, college];
   }
 
-  Future _getCollege() async {
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .get()
-        .then((snapshot) {
-      if (snapshot.exists) {
-        setState(() {
-          college = snapshot.get('faculdade')!;
-          print(college);
-        });
-      }
-    });
+  Future _initialize() async {
+    await _fetchData();
   }
 
   @override
   void initState() {
-    // TODO: implement initState
-    _getCollege();
-    _getName();
+    _initialize();
     super.initState();
   }
 
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -78,16 +72,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 },
               ),
               ListTile(
-                title: const Text('Perfil'),
-                onTap: () {
-                  Navigator.of(context).pushNamed('/perfil');
-                },
-              ),
-              ListTile(
                 title: const Text('Logout'),
                 onTap: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: ((context) => const LoginPage())));
+                  Navigator.of(context).pushNamed('/root');
                 },
               ),
             ],
@@ -98,7 +85,7 @@ class _ProfilePageState extends State<ProfilePage> {
           title: const Text('Perfil'),
         ),
         body: ListView(
-          children: <Widget>[
+          children: [
             Container(
               height: 250,
               decoration: const BoxDecoration(
@@ -112,30 +99,28 @@ class _ProfilePageState extends State<ProfilePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
+                children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: const <Widget>[
+                    children: const [
                       CircleAvatar(
-                        backgroundColor: Colors.white70,
-                        minRadius: 60.0,
-                        child: CircleAvatar(
-                          backgroundColor: Colors.white,
-                          radius: 50.0,
-                          child: Icon(
-                            Icons.person,
-                            size: 80.0,
-                            color: Colors.green,
-                          ),
-                        ),
-                      ),
+                          backgroundColor: Colors.white70,
+                          minRadius: 60.0,
+                          child: CircleAvatar(
+                            backgroundColor: Colors.white,
+                            minRadius: 50.0,
+                            child: Icon(
+                              Icons.person,
+                              size: 75,
+                            ),
+                          )),
                     ],
                   ),
                   const SizedBox(
                     height: 10,
                   ),
-                  const Text(
-                    'Nome',
+                  Text(
+                    name!,
                     style: const TextStyle(
                       fontSize: 35,
                       fontWeight: FontWeight.bold,
@@ -145,8 +130,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   const SizedBox(
                     height: 5,
                   ),
-                  const Text(
-                    'Faculdade',
+                  Text(
+                    college!,
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 20,

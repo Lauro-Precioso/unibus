@@ -49,7 +49,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   // Login Function
   @override
-  Future<User?> loginUsingEmailPassword(
+  Future loginUsingEmailPassword(
       {required String email,
       required String password,
       required BuildContext context}) async {
@@ -68,15 +68,18 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   var collection = FirebaseFirestore.instance.collection("Users");
-  var uid = FirebaseAuth.instance.currentUser?.uid;
+  bool? driver;
 
   // isDriver Verification
-  dynamic driver() async {
+  Future _isDriver() async {
+    var uid = FirebaseAuth.instance.currentUser?.uid;
     var query = await collection.doc(uid).get();
 
-    bool isDriver = query.get('motorista');
-    print(isDriver);
-    return isDriver;
+    setState(() {
+      driver = query.get('motorista');
+    });
+    print(driver);
+    return driver;
   }
 
   @override
@@ -169,16 +172,12 @@ class _LoginPageState extends State<LoginPage> {
                             email: _emailController.text,
                             password: _passwordController.text,
                             context: context);
-                        bool isDriver = await driver();
                         if (user != null) {
-                          if (isDriver != false) {
-                            Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                    builder: ((context) => MotoristaPage())));
+                          await _isDriver();
+                          if (driver == true) {
+                            Navigator.of(context).pushNamed('/motorista');
                           } else {
-                            Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                    builder: ((context) => AlunoPage())));
+                            Navigator.of(context).pushNamed('/aluno');
                           }
                         }
                       },
